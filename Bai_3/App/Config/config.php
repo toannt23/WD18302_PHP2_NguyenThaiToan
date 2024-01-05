@@ -3,7 +3,7 @@
 $hostname = "localhost";
 $username = "root";
 $password = "mysql";
-$database = "wd18302_php2_nguyenthaitoan";
+$database = "php2_liststaff";
 
 $connection = new mysqli($hostname, $username, $password, $database);
 
