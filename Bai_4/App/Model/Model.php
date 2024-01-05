@@ -1,7 +1,7 @@
 <?php
 function get_staff()
 {
-    include '../Config/config.php';
+    include 'App/Config/config.php';
     $sql = "SELECT * FROM nhanvien";
     // Get the result
     $stmt = $connection->prepare($sql);
