@@ -1,26 +1,6 @@
 <?php
-
-require_once "vendor\autoload.php";
-
-
-use Php2\Oop\Core\Base;
-use Php2\Oop\Model\BaseModel;
-use Php2\Oop\Core\Form;
-use Php2\Oop\Core\Filed;
-
-
-$base = new Base;
-$basemodel = new BaseModel;
-
-
-echo $base->getName() . "<br>";
-$base->setName("Javascript");
-echo $base->getName() . "<br>";
-//Hang so khong can tao doi tung new (chang han nhu public static hay const)
-echo $basemodel->create() . "<br>";
-echo $basemodel->update() . "<br>";
-echo $basemodel->delete() . "<br>";
-echo ("Nguyễn Thái Toàn PC06149 LAB3 WD18302");
+ob_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,45 +8,69 @@ echo ("Nguyễn Thái Toàn PC06149 LAB3 WD18302");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NguyenThaiToan_Lab3</title>
+    <title>AdminHub</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="Public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="d-flex justify-content-center">ĐĂNG KÝ TÀI KHOẢN MỚI</h1>
-        <?php
-        $form = Form::begin(" ", "post");
-        ?>
-        <div class="row">
-            <div class="col">
-                <?php echo $form->filed('firstname'); ?>
-            </div>
-            <div class="col">
-                <?php echo $form->filed('lastname'); ?>
-            </div>
-        </div>
-        <?php
-        echo $form->filed("email");
-        ?>
-        <?php
-        echo $form->filed("password")->passwordFiled();
-        ?>
-        <?php
-        echo $form->filed("confirm")->passwordFiled();
-        ?>
-        <button type="submit" name="them" class="btn btn-primary">
-            Gửi
-        </button>
-        <?php echo Form::end(); ?>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"></script>
+    <?php
+    $controller = "login";
+    if (isset($_GET['ctrl']))
+        $controller = $_GET['ctrl'];
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"></script>
+    switch ($controller) {
+        case "home":
+            include 'App/View/client/home.php';
+            break;
+        case "task":
+            include 'App/View/client/task.php';
+            break;
+        case "add_task":
+            include 'App/View/client/add_task.php';
+            break;
+        case "staff":
+            include 'App/View/client/staff.php';
+            break;
+        case "assignment":
+            include 'App/View/client/assignment.php';
+            break;
+        case "add_assignment":
+            include 'App/View/client/add_assignment.php';
+            break;
+        case "login":
+            include 'App/View/client/login.php';
+            break;
+        case "logout":
+            unset($_SESSION['user']);
+            header("location: index.php");
+            exit;
+    }
+    ?>
+    <script src="Public/js/login.js"></script>
+    <script src="Public/js/scrpit.js"></script>
+    <!-- SCRPIT BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+        </script>
+
 </body>
 
 </html>
+<?php
+ob_end_flush();
+?>
