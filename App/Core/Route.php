@@ -1,80 +1,34 @@
-<?php
+<?php 
 
 namespace App\Core;
 
-class Route
-{
-    public $url;
-    public $nameController = "HomeController";
-    public $nameMethod = "home";
-    public $path = 'App/Controllers/';
-    public $controller;
-    function __construct()
+use App\Core\RouteNotFoundException;
+
+class Route{
+    protected array $routes;
+
+    public function register(string $route, callable|array $action): self
     {
-        $this->request();
-        $this->renderController();
-        $this->renderMethod();
+        //var_dump($route);
+        $this->routes[$route] = $action;
+        //var_dump($this->routes);
+        return $this;
     }
-    function request()
-    {
-
-        $this->url = isset($_GET['url']) ? $_GET['url'] : null;
-
-        // filter_var trong php là gì?
-
-        if ($this->url != null) {
-            $this->url = rtrim($this->url, '/');
-            $this->url = explode('/', filter_var($this->url, FILTER_SANITIZE_URL));
-        } else {
-            unset($this->url);
+    public function resolve(string $requesUrl){
+        $route = explode('?',$requesUrl)[0];
+        $action = $this->routes[$route] ?? null;
+        if(!$action){
+           // thorw new RouteNotFoundException();
         }
-    }
 
-    function renderController()
-    {
-        if (!isset($this->url[0])) {
-            $className = $this->path . $this->nameController;
-            $className = preg_replace("~\/~", "\\", $className);
-            $this->controller = new $className;
-            $this->controller->HomeController();
-        } else {
-            $this->nameController = $this->url[0];
-            $file = __DIR__ . '/../Controllers/' . $this->nameController . '.php';
+        if(is_array($action)){
+            return call_user_func($action);
 
-            if (file_exists($file)) {
-                require_once $file;
-                $className = $this->path . $this->nameController;
-                $className = preg_replace("~\/~", "\\", $className);
-                if (class_exists($className)) {
-                    $this->controller = new $className;
-                } else {
-                    header('Location:' . ROOT_URL . 'HomeController/Error');
-                }
-            } else {
+            if(class_exists($class)){
+                $class = new $class();
 
-                header('Location:' . ROOT_URL . 'HomeController/Error');
-            }
-        }
-    }
-    function renderMethod()
-    {
-        if (isset($this->url[2])) {
-            $this->nameMethod = $this->url[1];
-            // Kiểm tra xem có tồn tại method vừa gán
-            if (method_exists($this->controller, $this->nameMethod)) {
-                $this->controller->{$this->nameMethod}($this->url[2]);
-            } else {
-                header('Location:' . ROOT_URL . 'HomeController/Error');
-            }
-        } else {
-            // kiểm tra hàm có tồn tại hàm không có tham số 
-            if (isset($this->url[1])) {
-                $this->nameMethod = $this->url[1];
-                // Kiểm tra xem có tồn tại method vừa gán
-                if (method_exists($this->controller, $this->nameMethod)) {
-                    $this->controller->{$this->nameMethod}();
-                } else {
-                    header('Location:' . ROOT_URL . 'HomeController/Error');
+                if(method_exists($class,$method)){
+                    return call_user_func_array([$class,$method],[]);
                 }
             }
         }
