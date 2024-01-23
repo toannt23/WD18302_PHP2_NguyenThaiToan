@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\RenderBase;
 
-class HomeController extends BaseController
+class TaskController extends BaseController
 {
 
     private $_renderBase;
@@ -18,18 +18,19 @@ class HomeController extends BaseController
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
+        $this->TaskController();
     }
 
-    function HomeController()
+    function TaskController()
     {
-        $this->homePage();
+        $this->taskPage();
     }
 
-    function homePage()
+    function taskPage()
     {
-        //$this->_renderBase->renderHeader();
-        //$this->_renderBase->renderSidebar();
-        $this->load->render('client/home');
+        $this->_renderBase->renderHeader();
+        $this->_renderBase->renderSidebar();
+        $this->load->render('client/task');
     }
 
     function detail($id)

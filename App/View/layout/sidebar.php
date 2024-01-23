@@ -6,19 +6,19 @@
     </a>
     <ul class="side-menu top">
         <li>
-            <a href="">
+            <a href="home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang chủ</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="?url=StaffController">
                 <i class='bx bxs-user'></i>
                 <span class="text">Quản lí nhân viên</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="?url=TaskController">
                 <i class='bx bx-table'></i>
                 <span class="text">Quản lí công việc</span>
             </a>
