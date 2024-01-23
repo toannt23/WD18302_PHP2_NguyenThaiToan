@@ -1,15 +1,7 @@
 <?php
-
-require_once "vendor\autoload.php";
-//require_once "App.php";
-
-define("ROOT_URL", "127.0.0.1:5000");
-
-use App\Core\Route;
-
-new Route;
+ob_start();
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +24,39 @@ new Route;
 </head>
 
 <body>
+    <?php
+    $controller = "login";
+    if (isset($_GET['ctrl']))
+        $controller = $_GET['ctrl'];
 
+    switch ($controller) {
+        case "home":
+            include 'App/View/client/home.php';
+            break;
+        case "task":
+            include 'App/View/client/task.php';
+            break;
+        case "add_task":
+            include 'App/View/client/add_task.php';
+            break;
+        case "staff":
+            include 'App/View/client/staff.php';
+            break;
+        case "assignment":
+            include 'App/View/client/assignment.php';
+            break;
+        case "add_assignment":
+            include 'App/View/client/add_assignment.php';
+            break;
+        case "login":
+            include 'App/View/client/login.php';
+            break;
+        case "logout":
+            unset($_SESSION['user']);
+            header("location: index.php");
+            exit;
+    }
+    ?>
     <script src="Public/js/login.js"></script>
     <script src="Public/js/scrpit.js"></script>
     <!-- SCRPIT BOOTSTRAP -->
@@ -47,3 +71,6 @@ new Route;
 </body>
 
 </html>
+<?php
+ob_end_flush();
+?>

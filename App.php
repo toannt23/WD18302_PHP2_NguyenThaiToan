@@ -1,15 +1,7 @@
 <?php
-
-require_once "vendor\autoload.php";
-//require_once "App.php";
-
-define("ROOT_URL", "127.0.0.1:5000");
-
-use App\Core\Route;
-
-new Route;
+ob_start();
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,3 +39,6 @@ new Route;
 </body>
 
 </html>
+<?php
+ob_end_flush();
+?>
