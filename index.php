@@ -5,9 +5,13 @@ require_once "vendor\autoload.php";
 
 define("ROOT_URL", "127.0.0.1:5000");
 
-use App\Core\Route;
+use App\Models\Database;
 
-new Route;
+// use App\Core\Route;
+
+// new Route;
+Database::DdO();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
