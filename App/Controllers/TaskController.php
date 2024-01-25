@@ -28,7 +28,7 @@ class TaskController extends BaseController
 
     function taskPage()
     {
-        $this->_renderBase->renderHeader();
+        //$this->_renderBase->renderHeader();
         $this->_renderBase->renderSidebar();
         $this->load->render('client/task');
     }

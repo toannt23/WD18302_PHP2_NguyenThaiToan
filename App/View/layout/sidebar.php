@@ -24,7 +24,7 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="?url=AssignmentController">
                 <i class='bx bx-task'></i>
                 <span class="text">Phân công công việc</span>
             </a>

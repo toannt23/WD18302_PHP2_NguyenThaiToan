@@ -1,8 +1,5 @@
 <body>
     <!-- SIDEBAR -->
-    <?php
-    include 'App/View/layout/sidebar.php';
-    ?>
     <!-- SIDEBAR -->
     <!-- CONTENT -->
     <section id="content">

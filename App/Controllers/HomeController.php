@@ -28,7 +28,7 @@ class HomeController extends BaseController
     function homePage()
     {
         //$this->_renderBase->renderHeader();
-        //$this->_renderBase->renderSidebar();
+        $this->_renderBase->renderSidebar();
         $this->load->render('client/home');
     }
 

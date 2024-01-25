@@ -13,7 +13,7 @@
         <span class="num">8</span>
     </a>
     <a href="#" class="profile">
-        <!-- <img src="Public/img/user.jpg"> -->
+        <img src="../../../Public/img/user.jpg">
     </a>
 </nav>
 <!-- NAVBAR -->

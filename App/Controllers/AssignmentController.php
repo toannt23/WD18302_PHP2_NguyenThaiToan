@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\RenderBase;
 
-class StaffController extends BaseController
+class AssignmentController extends BaseController
 {
 
     private $_renderBase;
@@ -18,19 +18,19 @@ class StaffController extends BaseController
     {
         parent::__construct();
         $this->_renderBase = new RenderBase();
-        $this->StaffController();
+        $this->AssignmentController();
     }
 
-    function StaffController()
+    function AssignmentController()
     {
-        $this->staffPage();
+        $this->assignmentPage();
     }
 
-    function staffPage()
+    function assignmentPage()
     {
         //$this->_renderBase->renderHeader();
         $this->_renderBase->renderSidebar();
-        $this->load->render('client/staff');
+        $this->load->render('client/assignment');
     }
 
     function detail($id)
