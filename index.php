@@ -6,11 +6,25 @@ require_once "vendor\autoload.php";
 define("ROOT_URL", "127.0.0.1:5000");
 
 use App\Models\Database;
+use App\Models\UserModel;
 
 // use App\Core\Route;
 
 // new Route;
-Database::DdO();
+//Database::mysQli();
+$userModel = new UserModel();
+var_dump($userModel->getAllUser());
+//Hướng đối tượng 
+/*
+Class(cú pháp, namepace, autoload, thuộc tính, phương thức)
+Kế thừa
+Abstract, Interface & Trail
+
+MVC
+-Model: Gọi Database, lấy dữ liệu ra(Responsitories Pattern)
+-Controller:
+    => Trả về dữ liệu từ model ("select * from where trong controller không đc"), gọi tới view nếu có 
+*/
 
 ?>
 <!DOCTYPE html>

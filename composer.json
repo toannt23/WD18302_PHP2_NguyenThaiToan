@@ -4,12 +4,5 @@
         "psr-4": {
             "App\\": "App"
         }
-    },
-    "authors": [
-        {
-            "name": "toannt23",
-            "email": "149867771+toannt23@users.noreply.github.com"
-        }
-    ],
-    "require": {}
+    }
 }

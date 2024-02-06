@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-md-7 pe-0">
                             <div class="form-left h-100 py-5 px-5">
-                                <form action="" class="row g-4">
+                                <form action="?url=LoginController/handleLogin" class="row g-4">
                                     <div class="col-12">
                                         <label>Email<span class="text-danger">*</span></label>
                                         <div class="input-group">

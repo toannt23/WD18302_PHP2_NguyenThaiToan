@@ -4,37 +4,38 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
+use mysqli;
 
 class Database
 {
     private static $dbHost = 'localhost';
-    private static $dbName = 'PHP2_Lab5';
+    private static $dbName = 'wd18302_php2_nguyenthaitoan';
     private static $dbUser = 'root';
     private static $dbPassword = 'mysql';
     private static $dbPort = '3306';
 
-    public $connection;
-
-    public function __construct()
-    {
-        self::PdO();
-        var_dump($this->connection);
-    }
-
-    public static function PdO()
+    public function PdO()
     {
         try {
             $conn = new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUser, self::$dbPassword);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully";
-            self::$connection = $conn;
+            //echo "Connected successfully";
+            //self::$connection = $conn;
+            return $conn;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
     }
-    public static function mysQli()
+    public function mysQli()
     {
+        // Create connection
+        $conn = new mysqli(self::$dbHost, self::$dbUser, self::$dbPassword, self::$dbName);
 
+        // Check connection
+        if ($conn->connect_errno) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        return $conn;
     }
 }
