@@ -51,6 +51,11 @@ abstract class BaseModel implements CrudInterface
         $this->_query = "SELECT fullname FROM $this->tableName";
         return $this;
     }
+    public function checkMail($email)
+    {
+        $this->_query = "SELECT * FROM $this->tableName WHERE email = $email";
+        return $this;
+    }
     public function getID()
     {
         $this->_query = "SELECT id FROM $this->tableName";

@@ -17,11 +17,15 @@
                     <div class="mb-3">
                         <label class="form-label">Tên công việc</label>
                         <input type="text" id="name" name="name" value="<?= $data['name'] ?>" class="form-control">
+                        <?php echo (isset($_SESSION['name_error']) ? '<div class="text-danger">' . $_SESSION['name_error'] . '</div>' : '');
+                        $_SESSION['name_error'] = null; ?>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Thời hạn</label>
                         <input type="date" id="dealine" name="dealine" value="<?= $data['dealine'] ?>"
                             class="form-control" aria-label="First name">
+                        <?php echo (isset($_SESSION['dealine_error']) ? '<div class="text-danger">' . $_SESSION['dealine_error'] . '</div>' : '');
+                        $_SESSION['dealine_error'] = null; ?>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Trạng thái</label>
@@ -33,6 +37,8 @@
                     <div class="mb-3">
                         <label class="form-label">Chi tiết công việc</label><br>
                         <textarea name="description" id="description" cols="60" rows="5"><?= $description ?></textarea>
+                        <?php echo (isset($_SESSION['description_error']) ? '<div class="text-danger">' . $_SESSION['description_error'] . '</div>' : '');
+                        $_SESSION['description_error'] = null; ?>
                     </div>
                     <input type="hidden" name="" id="" value="<?= $hidden ?>">
                     <div class="mb-3">

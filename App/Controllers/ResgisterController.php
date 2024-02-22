@@ -40,41 +40,45 @@ class ResgisterController extends BaseController
         // kiểm tra trước rồi mới new UserModel();
         $userModel = new UserModel();
 
-
+        if (empty($_POST["fullname"])) {
+            $fullnameError = 'Họ và tên không bỏ trống';
+            $_SESSION['fullname_error'] = $fullnameError;
+            header('Location: /?url=ResgisterController');
+        }
         if (empty($_POST["email"])) {
             $emailError = 'Email không bỏ trống';
             $_SESSION['email_error'] = $emailError;
-            return header('Location: /?url=ResgisterController');
+            header('Location: /?url=ResgisterController');
         }
 
         if (empty($_POST["password"])) {
             $passwordError = 'Mật khẩu không bỏ trống';
             $_SESSION['password_error'] = $passwordError;
-            return header('Location: /?url=ResgisterController');
+            header('Location: /?url=ResgisterController');
+        }
+
+        if (empty($_POST["phone"])) {
+            $phoneError = 'Số điện thoại không bỏ trống';
+            $_SESSION['phone_error'] = $phoneError;
+            header('Location: /?url=ResgisterController');
         }
 
         //$_POST["password"] = $userModel->hasdedPassword($_POST["password"]);
-        $user = $userModel->checkUserExist($_POST["email"], $_POST["password"]);
+        $checkuser = $userModel->checkMailExit($_POST["email"]);
 
-        if ($user) {
+        if ($checkuser) {
             // tài khoản này có rồi , vui lòng đăng nhập
             // chuyển trang tới /?url=LoginController/loadViewLogin
             // báo lỗi
             $emailErrorUser = 'Tài khoản đã có vui lòng đăng nhập.';
-            $_SESSION['email_user'] = $emailErrorUser;
-            return header('Location: /?url=ResgisterController');
+            $_SESSION['error_user'] = $emailErrorUser;
+
+            header('Location: /?url=ResgisterController');
+            exit();
         } else {
             $userModel->registerUser($_POST);
-            return header('Location: /?url=LoginController');
+            header('Location: /?url=LoginController/loadViewLogin');
         }
-
-        // $userModel->registerUser($_POST);
-
-        // if ($userModel) {
-        //     return header('Location: /?url=LoginController');
-        // } else {
-        //     var_dump('Đăng ký không thành công.');
-        // }
 
     }
 

@@ -41,6 +41,10 @@
                                             <u style="text-decoration: none;" class="text-primary">Đăng ký</u></a> tài
                                         khoản mới</p>
                                 </div>
+                                <div>
+                                    <p class="text-muted"><a href="?url=ForgotPassController/viewPass">Quên mật
+                                            khẩu</a></p>
+                                </div>
                             </form>
                         </div>
                     </div>

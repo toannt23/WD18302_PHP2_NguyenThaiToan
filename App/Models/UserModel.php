@@ -22,10 +22,27 @@ class UserModel extends BaseModel
     {
         return $this->getFullName()->get();
     }
+    public function checkMailExit($email)
+    {
+        return $this->select()->where('email', '=', $email)->first();
+    }
 
+    public function updatePass($email, $password)
+    {
+        $pass = $this->select()->where('email', '=', $email)->first();
+        if ($pass) {
+            $id = $pass['id'];
+            $this->update($id, ['password' => $password]);
+        }
+
+    }
     public function checkUserExist($email, $password)
     {
         return $this->select()->where('email', '=', $email)->where('password', '=', $password)->first();
+    }
+    public function checkForgot($email)
+    {
+        return $this->checkMail($email);
     }
 
     public function hasdedPassword($password)

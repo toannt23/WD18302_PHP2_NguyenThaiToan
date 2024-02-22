@@ -41,16 +41,47 @@ class TaskController extends BaseController
         $this->_renderBase->renderSidebar();
         $this->load->render('client/task_add');
     }
-    public function insertTask()
+    public function handleInsertTask()
     {
         $taskModel = new TaskModel();
+        //validate form
+        if (empty($_POST["name"])) {
+            $nameError = "Tên không được bỏ trống";
+            $_SESSION['name_error'] = $nameError;
+            return header('Location: /?url=TaskController/taskAdd');
+        }
+        if (empty($_POST["dealine"])) {
+            $dealineError = "Thời hạn được bỏ trống";
+            $_SESSION['dealine_error'] = $dealineError;
+            return header('Location: /?url=TaskController/taskAdd');
+        }
+        if (empty($_POST["description"])) {
+            $descriptionError = "Chi tiết được bỏ trống";
+            $_SESSION['description_error'] = $descriptionError;
+            return header('Location: /?url=TaskController/taskAdd');
+        }
         $taskModel->insertTaskModel($_POST);
         return header('Location: /?url=TaskController/taskPage');
     }
 
     public function updateTask($id)
     {
-        //Xu ly hadlle
+        if (empty($_POST["name"])) {
+            $nameError = "Tên không được bỏ trống";
+            $_SESSION['name_error'] = $nameError;
+            return header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+        if (empty($_POST["dealine"])) {
+            $dealineError = "Thời hạn chưa được thiết lập";
+            $_SESSION['dealine_error'] = $dealineError;
+            return header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+        if (empty($_POST["description"])) {
+            $descriptionError = "Chi tiết được bỏ trống";
+            $_SESSION['description_error'] = $descriptionError;
+            return header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Xử lý dữ liệu form
             $name = isset($_POST['name']) ? $_POST['name'] : '';
